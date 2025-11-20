@@ -1,0 +1,9 @@
+body { margin: 0; font-family: Arial; background: var(--bg); color: var(--text); transition: 0.3s;}
+:root { --bg: #ffffff; --text: #000000;}
+.dark { --bg: #0d0d0d; --text: #ffffff;}
+.navbar { display: flex; padding: 15px; background: #1a237e; color: white; align-items: center; justify-content: space-between;}
+.navbar a { color: white; margin: 0 10px; text-decoration: none; }
+.logo { height: 40px; }
+.hero { padding: 80px; text-align: center; background: linear-gradient(135deg, #1a237e, #3949ab); color: white;}
+.page { padding: 40px;}
+.aos { opacity: 0; transform: translateY(20px); transition: 0.6s;}
