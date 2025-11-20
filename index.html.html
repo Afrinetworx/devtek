@@ -1,64 +1,112 @@
-<!DOCTYPE html>
+# Afrinetworx — Premium Multi‑Page Site
+
+
+This canvas contains a complete multi-page static site (ready for GitHub Pages). Files included below — copy each file into your repository with the same filenames and folder structure.
+
+
+---
+
+
+## Files
+
+
+### `index.html`
+```html
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #2b5cff;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            margin-top: 0;
-        }
-        footer {
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-            color: #666;
-            font-size: 14px;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Afrinetworx — Home</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
-<body>
+<body class="light">
+<header class="site-header">
+<div class="container header-inner">
+<a class="logo" href="index.html">
+<!-- Replace assets/logo.svg with your real logo -->
+<img src="assets/logo.svg" alt="Afrinetworx logo" width="48" height="48">
+<span class="brand">Afrinetworx</span>
+</a>
 
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
 
-    <div class="container">
-        <h2>Hello!</h2>
-        <p>
-            This is a basic HTML page hosted on GitHub Pages.
-            You can edit this content inside your <strong>index.html</strong>.
-        </p>
+<nav class="nav">
+<a href="index.html#services" class="nav-link">Services</a>
+<a href="about.html" class="nav-link">About</a>
+<a href="services.html" class="nav-link">All Services</a>
+<a href="index.html#contact" class="nav-link">Contact</a>
+<button id="theme-toggle" aria-label="Toggle theme" class="theme-toggle">🌙</button>
+</nav>
 
-        <p>
-            Add your own text, images, links, or sections as needed.
-        </p>
-    </div>
 
-    <footer>
-        © 2025 Your Website
-    </footer>
+<button class="mobile-menu" id="mobile-menu">☰</button>
+</div>
+</header>
 
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-inner">
+<h1 class="reveal">Premium Technical & Digital Services</h1>
+<p class="lead reveal">Technical services · IT support · Web design · E‑commerce · Content creation</p>
+<div class="hero-cta reveal">
+<a href="services.html" class="btn">Explore Services</a>
+<a href="#contact" class="btn btn-outline">Contact Us</a>
+</div>
+</div>
+</section>
+
+
+<section class="services" id="services">
+<div class="container">
+<h2 class="section-title reveal">Selected Services</h2>
+<div class="grid reveal-group">
+<article class="card">
+<h3>Technical Services</h3>
+<p>Installations, hardware setup, diagnostics and on‑site support.</p>
+</article>
+<article class="card">
+<h3>IT & Networking</h3>
+<p>Networking, system management, backups and security.</p>
+</article>
+<article class="card">
+<h3>Web Design</h3>
+<p>Responsive design, UX-focused, and performance optimized.</p>
+</article>
+<article class="card">
+<h3>E‑commerce</h3>
+<p>Online stores, payment integration and product management.</p>
+</article>
+<article class="card">
+<h3>Content Creation</h3>
+<p>Copywriting, visuals and social media content packages.</p>
+</article>
+</div>
+</div>
+</section>
+
+
+<section class="contact" id="contact">
+<div class="container">
+<h2 class="section-title reveal">Contact</h2>
+<p class="reveal">📞 <strong>+264 81 236 0559</strong> • 📧 <strong>afrinetworx@gmail.com</strong></p>
+</div>
+</section>
+</main>
+
+
+<footer class="site-footer">
+<div class="container">
+<small>© 2025 Afrinetworx. All rights reserved.</small>
+</div>
+</footer>
+
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
+```
+
+
+Tell me which next step you want and I'll prepare it.
