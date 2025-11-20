@@ -1,112 +1,130 @@
 # Afrinetworx — Premium Multi‑Page Site
-
-
-This canvas contains a complete multi-page static site (ready for GitHub Pages). Files included below — copy each file into your repository with the same filenames and folder structure.
+/* Reveal/Scroll animations (basic AOS-like) */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 600ms ease,transform 600ms ease}
+.reveal.show{opacity:1;transform:none}
+.reveal-group .card{transition-delay:120ms}
+```
 
 
 ---
 
 
-## Files
+### `assets/js/main.js`
+```javascript
+// Main interactive script: theme toggle, mobile menu, smooth scroll, and simple AOS
+(function(){
+const root = document.documentElement;
+const body = document.body;
 
 
-### `index.html`
-```html
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Afrinetworx — Home</title>
-<link rel="stylesheet" href="assets/css/styles.css">
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-</head>
-<body class="light">
-<header class="site-header">
-<div class="container header-inner">
-<a class="logo" href="index.html">
-<!-- Replace assets/logo.svg with your real logo -->
-<img src="assets/logo.svg" alt="Afrinetworx logo" width="48" height="48">
-<span class="brand">Afrinetworx</span>
-</a>
+// Theme: persist in localStorage
+const themeToggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('afrinetworx-theme');
+if(savedTheme) body.classList.remove('light','dark'), body.classList.add(savedTheme);
+else body.classList.add('light');
 
 
-<nav class="nav">
-<a href="index.html#services" class="nav-link">Services</a>
-<a href="about.html" class="nav-link">About</a>
-<a href="services.html" class="nav-link">All Services</a>
-<a href="index.html#contact" class="nav-link">Contact</a>
-<button id="theme-toggle" aria-label="Toggle theme" class="theme-toggle">🌙</button>
-</nav>
+function updateToggleIcon(){
+if(body.classList.contains('dark')) themeToggle.textContent = '☀️';
+else themeToggle.textContent = '🌙';
+}
+if(themeToggle){
+themeToggle.addEventListener('click', ()=>{
+body.classList.toggle('dark');
+body.classList.toggle('light');
+const t = body.classList.contains('dark')? 'dark' : 'light';
+localStorage.setItem('afrinetworx-theme', t);
+updateToggleIcon();
+});
+updateToggleIcon();
+}
 
 
-<button class="mobile-menu" id="mobile-menu">☰</button>
-</div>
-</header>
+// Mobile menu toggle (basic)
+const mobileMenu = document.getElementById('mobile-menu');
+const nav = document.querySelector('.nav');
+if(mobileMenu && nav){
+mobileMenu.addEventListener('click', ()=>{
+nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+});
+}
 
 
-<main>
-<section class="hero" id="home">
-<div class="container hero-inner">
-<h1 class="reveal">Premium Technical & Digital Services</h1>
-<p class="lead reveal">Technical services · IT support · Web design · E‑commerce · Content creation</p>
-<div class="hero-cta reveal">
-<a href="services.html" class="btn">Explore Services</a>
-<a href="#contact" class="btn btn-outline">Contact Us</a>
-</div>
-</div>
-</section>
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click', function(e){
+const target = document.querySelector(this.getAttribute('href'));
+if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+});
+});
 
 
-<section class="services" id="services">
-<div class="container">
-<h2 class="section-title reveal">Selected Services</h2>
-<div class="grid reveal-group">
-<article class="card">
-<h3>Technical Services</h3>
-<p>Installations, hardware setup, diagnostics and on‑site support.</p>
-</article>
-<article class="card">
-<h3>IT & Networking</h3>
-<p>Networking, system management, backups and security.</p>
-</article>
-<article class="card">
-<h3>Web Design</h3>
-<p>Responsive design, UX-focused, and performance optimized.</p>
-</article>
-<article class="card">
-<h3>E‑commerce</h3>
-<p>Online stores, payment integration and product management.</p>
-</article>
-<article class="card">
-<h3>Content Creation</h3>
-<p>Copywriting, visuals and social media content packages.</p>
-</article>
-</div>
-</div>
-</section>
+// Simple AOS: reveal on intersect
+const io = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting) entry.target.classList.add('show');
+});
+},{threshold:0.12});
 
 
-<section class="contact" id="contact">
-<div class="container">
-<h2 class="section-title reveal">Contact</h2>
-<p class="reveal">📞 <strong>+264 81 236 0559</strong> • 📧 <strong>afrinetworx@gmail.com</strong></p>
-</div>
-</section>
-</main>
+document.querySelectorAll('.reveal, .reveal-group > *').forEach(el=>io.observe(el));
 
 
-<footer class="site-footer">
-<div class="container">
-<small>© 2025 Afrinetworx. All rights reserved.</small>
-</div>
-</footer>
-
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+// Smooth nav active state (optional)
+const navLinks = document.querySelectorAll('.nav-link');
+function setActive(){
+const sections = Array.from(document.querySelectorAll('section[id]'));
+let index = sections.findIndex(s => s.getBoundingClientRect().top > 80)-1;
+if(index<0) index = 0;
+navLinks.forEach(l=>l.classList.remove('active'));
+if(navLinks[index]){
+navLinks[index].classList.add('active');
+}
+}
+window.addEventListener('scroll', setActive);
+setActive();
+})();
 ```
+
+
+---
+
+
+### `assets/logo.svg`
+> Placeholder: simple SVG logo. Replace with your brand SVG. Example: a minimal mark with "A" and network lines.
+
+
+---
+
+
+## How to use
+1. Create a repository named `afrinetworx` (or your-username.github.io for user site).
+2. Place files exactly as shown (keep `assets/` folder).
+3. Push to GitHub and enable Pages (branch `main`, folder `/`).
+4. Edit `assets/logo.svg` to add your real logo.
+5. Customize colors in `assets/css/styles.css` (variables at top).
+
+
+---
+
+
+## What's included
+- Multi-page site: `index.html`, `about.html`, `services.html`
+- Logo placement and favicon
+- Smooth scrolling for anchor links
+- Simple AOS-style scroll reveals using `IntersectionObserver`
+- Theme toggle (light/dark) persisted via `localStorage`
+- Mobile menu fallback
+
+
+---
+
+
+If you want, I can now:
+- Export these files as a downloadable zip
+- Generate a ready `README.md` for the repo
+- Create sample `assets/logo.svg` content for you
+- Add a contact form (Netlify Forms or Formspree integration)
 
 
 Tell me which next step you want and I'll prepare it.
